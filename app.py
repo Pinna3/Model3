@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -15,9 +15,29 @@ class Contact(db.Model):
         return f'{self.id} {self.name}'
 
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+@app.route('/<int:id>', methods=['GET', 'POST'])
+def index(id):
+    contact = Contact.query.get_or_404(id)
+    all_contacts = Contact.query.order_by(Contact.id).all()
+    contacts_len = len(Contact.query.all())
+    return render_template(
+        'index.html',
+        contact=contact,
+        contacts=all_contacts,
+        contacts_len=contacts_len
+    )
+
+
+@app.route('/edit/<int:id>', methods=['GET', 'POST'])
+def edit(id):
+    contact = Contact.query.get_or_404(id)
+    if request.method == 'POST':
+        contact.name = request.form['name']
+        contact.email = request.form['email']
+        db.session.commit()
+        return redirect(f'/{contact.id}')
+    else:
+        return render_template('edit.html', contact=contact)
 
 
 if __name__ == '__main__':
