@@ -18,7 +18,7 @@
                         <h3 class="panel-title">Panel Heading</h3>
                     </div>
                     <div class="col col-xs-6 text-right">
-                        <button type="button" class="btn btn-sm btn-primary btn-create">Create New</button>
+                        <a type="button" href="new" class="btn btn-sm btn-primary btn-create">Create New</a>
                     </div>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                             <tr>
                                 <td align="center">
                                 <a class="btn btn-default" href="edit/{{contact.id}}"><em class="fa fa-pencil"></em></a>
-                                <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
+                                <a class="btn btn-danger" href="delete/{{contact.id}}"><em class="fa fa-trash"></em></a>
                                 </td>
                                 <td class="hidden-xs">{{ contact.id }}</td>
                                 <td>{{ contact.name }}</td>
@@ -52,8 +52,8 @@
                     </div>
                     <div class="col col-xs-8">
                         <ul class="pagination hidden-xs pull-right">
-                            {% for contact in contacts %}
-                                <li><a href="/{{contact.id}}">{{contact.id}}</a></li>
+                            {% for contact in contacts_zipped %}
+                                <li><a href="/{{contact[0].id}}">{{contact[1]}}</a></li>
                             {% endfor %}
                         </ul>
                         <ul class="pagination visible-xs pull-right">

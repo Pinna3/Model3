@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>New Contact</title>
+{% endblock %}
+
+{% block body %}
+    <div class='container'>
+        <hr>
+        <h2>Edit</h2>
+        <form action="/new" method="POST">
+            <label for="name" class="form-label">Name: </label>
+            <input class="form-control" type="text" name="name" id="name" placeholder="Name...">
+            <br>
+            <label for="email" class="form-label">Email: </label>
+            <input class="form-control" type="text" name="email" id="email" placeholder="Email...">
+            <br>
+            <input class="btn btn-default" type="submit" value="Save">
+        </form>
+        <hr>
+    </div>
+{% endblock %}
